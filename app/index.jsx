@@ -7,11 +7,17 @@ import {
   StyleSheet,
   Button,
   TouchableOpacity,
+  Platform,
 } from "react-native";
 
 const Index = () => {
   const handleClickPress = () => {
-    router.push("/avatar/App");
+    if (Platform.OS == "web") {
+      router.push("web/App");
+    }
+    if (Platform.OS == "android" || Platform.OS == "ios") {
+      router.push("/avatar/App");
+    }
   };
   return (
     <SafeAreaView style={styles.container}>

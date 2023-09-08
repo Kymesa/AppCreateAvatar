@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "reader-avatar",
+    "name": "Reader-avatar",
     "slug": "reader-avatar",
+    "descripcion": "Avatar Metaverso",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -11,7 +12,9 @@
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     },
@@ -19,12 +22,18 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.keiner.readeravatar"
     },
     "web": {
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "scheme": "reader-avatar"
+    "scheme": "reader-avatar",
+    "extra": {
+      "eas": {
+        "projectId": "79482ecc-86e9-47b2-afd9-58347a72ef79"
+      }
+    }
   }
 }
