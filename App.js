@@ -1,20 +1,45 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useRef } from "react";
+import WebView from "react-native-webview";
+const subdomain = "demo";
+const App = () => {
+  const webView = useRef();
 
-export default function App() {
+  function onAvatarUrlReceived(message) {
+    alert(`Avatar Url = ${message.data?.url}`);
+  }
+
+  function onWebViewLoaded() {
+    webView.current.postMessage(
+      JSON.stringify({
+        target: "readyplayerme",
+        type: "subscribe",
+        eventName: "v1.avatar.exported",
+      })
+    );
+  }
+
+  function onMessageReceived(message) {
+    const data = message.nativeEvent.data;
+    const json = JSON.parse(data);
+
+    if (json?.source !== "readyplayerme") {
+      return;
+    }
+
+    if (json.eventName === "v1.avatar.exported") {
+      onAvatarUrlReceived(json);
+    }
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <WebView
+      ref={webView}
+      style={{ marginTop: 30 }}
+      onLoad={onWebViewLoaded}
+      onMessage={onMessageReceived}
+      source={{ uri: `https://${subdomain}.readyplayer.me/avatar?frameApi` }}
+    />
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
