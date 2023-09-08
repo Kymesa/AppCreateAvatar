@@ -1,6 +1,5 @@
 import React, { useRef } from "react";
 import WebView from "react-native-webview";
-const subdomain = "demo";
 const App = () => {
   const webView = useRef();
 
@@ -37,7 +36,9 @@ const App = () => {
       style={{ marginTop: 30 }}
       onLoad={onWebViewLoaded}
       onMessage={onMessageReceived}
-      source={{ uri: `https://${subdomain}.readyplayer.me/avatar?frameApi` }}
+      source={{
+        uri: `https://readyreactnative.readyplayer.me?frameApi&clearCache`,
+      }}
     />
   );
 };
