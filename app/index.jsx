@@ -1,3 +1,4 @@
+import { MEDIA_LIBRARY } from "expo-permissions";
 import { Stack, router } from "expo-router";
 import {
   View,
@@ -10,6 +11,8 @@ import {
   Platform,
 } from "react-native";
 //eas build -p android --profile preview
+MEDIA_LIBRARY.requestPermissionsAsync();
+MEDIA_LIBRARY.requestPermissionsAsync();
 const Index = () => {
   const handleClickPress = () => {
     if (Platform.OS == "web") {
