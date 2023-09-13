@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-
+//eas build -p android --profile preview
 const Index = () => {
   const handleClickPress = () => {
     if (Platform.OS == "web") {
@@ -42,17 +42,18 @@ const Index = () => {
             style={styles.images}
             source={require("../assets/thumbnail.jpg")}
           />
+          <TouchableOpacity style={styles.btn}>
+            <View style={styles.containerViewBtn}>
+              <Button
+                onPress={handleClickPress}
+                title="Crear Mi Avatar 😎"
+                color="#841584"
+                accessibilityLabel="Learn more about this purple button"
+              />
+            </View>
+          </TouchableOpacity>
         </View>
-
         {/* <Link href={{ pathname: "/avatar/ava", params: { id: "PLAYER" } }}> */}
-        <TouchableOpacity style={styles.btn}>
-          <Button
-            onPress={handleClickPress}
-            title="Crear Mi Avatar 😎"
-            color="#841584"
-            accessibilityLabel="Learn more about this purple button"
-          />
-        </TouchableOpacity>
         {/* </Link> */}
       </ScrollView>
     </SafeAreaView>
@@ -64,16 +65,16 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#0A151B",
   },
+  containerViewBtn: {
+    overflow: "hidden",
+    borderRadius: 100,
+  },
   btn: {
-    width: "100%",
-    paddingHorizontal: 100,
+    marginHorizontal: 100,
   },
   images: {
+    height: 400,
     width: "100%",
-  },
-  logo: {
-    width: 66,
-    height: 58,
   },
 });
 
