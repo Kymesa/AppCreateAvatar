@@ -1,5 +1,13 @@
 {
   "expo": {
+    "plugins": [
+      [
+        "expo-media-library",
+        {
+          "isAccessMediaLocationEnabled": true
+        }
+      ]
+    ],
     "name": "Reader-avatar",
     "slug": "reader-avatar",
     "descripcion": "Avatar Metaverso",

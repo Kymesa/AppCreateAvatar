@@ -1,14 +1,41 @@
 import { Stack } from "expo-router";
-import React, { useRef } from "react";
-import { SafeAreaView, View } from "react-native";
+import React, { useRef, useState } from "react";
+import { Button, View } from "react-native";
 import WebView from "react-native-webview";
-// "main": "node_modules/expo/AppEntry.js",
+
+import * as FileSystem from "expo-file-system";
+import { shareAsync } from "expo-sharing";
+
 const App = () => {
   const webView = useRef();
 
-  function onAvatarUrlReceived(message) {
-    alert(`Avatar Url = ${message.data?.url}`);
-  }
+  const [donwload, setDonwload] = useState(null);
+  const [statusDonwload, setStatusDonwload] = useState(true);
+
+  const donwloadFromUrl = async () => {
+    const fileName = "player_avatar.png";
+    const result = await FileSystem.downloadAsync(
+      donwload,
+      FileSystem.documentDirectory + fileName
+    );
+    save(result.uri);
+  };
+
+  const save = async (url) => {
+    await shareAsync(url);
+  };
+
+  const onAvatarUrlReceived = async (message) => {
+    const msj = message.data?.url;
+    const sbString = msj.substring(0, 54);
+    setDonwload(`${sbString}.png?scene=fullbody-posture-v1-transparent
+`);
+    setStatusDonwload(false);
+  };
+
+  // const handleClickDonwload = () => {
+  //   donwloadFromUrl();
+  // };
 
   function onWebViewLoaded() {
     webView.current.postMessage(
@@ -45,8 +72,19 @@ const App = () => {
           headerTitleStyle: {
             fontWeight: "bold",
           },
-          headerTintColor: "#FFFFFF",
-          headerStyle: { backgroundColor: "#0A151B" },
+          headerTintColor: "black",
+          headerRight: () => (
+            <>
+              <View>
+                <Button
+                  disabled={statusDonwload}
+                  onPress={donwloadFromUrl}
+                  title="DOW"
+                />
+              </View>
+            </>
+          ),
+          headerStyle: { backgroundColor: "white" },
         }}
       />
       <WebView
@@ -56,6 +94,9 @@ const App = () => {
         source={{
           uri: `https://readyreactnative.readyplayer.me?frameApi&clearCache`,
         }}
+        allowFileAccess={true}
+        allowUniversalAccessFromFileURLs={true}
+        allowFileAccessFromFileURLs={true}
       />
     </>
   );

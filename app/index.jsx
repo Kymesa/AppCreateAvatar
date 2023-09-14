@@ -9,10 +9,10 @@ import {
   Button,
   TouchableOpacity,
   Platform,
+  Text,
 } from "react-native";
 //eas build -p android --profile preview
-MEDIA_LIBRARY.requestPermissionsAsync();
-MEDIA_LIBRARY.requestPermissionsAsync();
+
 const Index = () => {
   const handleClickPress = () => {
     if (Platform.OS == "web") {
@@ -26,13 +26,11 @@ const Index = () => {
     <SafeAreaView style={styles.container}>
       <Stack.Screen
         options={{
-          title: "🎮 PLAYER AVATAR 🎮",
+          title: "🎮  " + "PLAYER AVATAR  " + "  🎮",
           headerTitleAlign: "center",
           headerShadowVisible: false,
-          headerStyle: { backgroundColor: "#0A151B" },
-          headerTintColor: "#FFFFFF",
-          headerLargeTitleShadowVisible: false,
-          headerSearchBarOptions: false,
+          headerStyle: { backgroundColor: "#DABCFF" },
+          headerTintColor: "black",
           headerTitleStyle: {
             fontWeight: "bold",
           },
@@ -49,7 +47,7 @@ const Index = () => {
             <View style={styles.containerViewBtn}>
               <Button
                 onPress={handleClickPress}
-                title="Crear Mi Avatar 😎"
+                title="😎 Crear Mi Avatar 😎"
                 color="#841584"
                 accessibilityLabel="Learn more about this purple button"
               />
@@ -76,7 +74,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 100,
   },
   images: {
-    height: 400,
+    height: 450,
     width: "100%",
   },
 });
